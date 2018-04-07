@@ -73,25 +73,26 @@
 
 
 		<%
-			Forum forum = (Forum) request.getAttribute("forum");
-			if (forum != null) {
-				List<Message> messages = forum.getMessages();
-				if (messages != null && !messages.isEmpty()) {
+			if(followed) {
+				Forum forum = (Forum) request.getAttribute("forum");
+				if (forum != null) {
+					List<Message> messages = forum.getMessages();
+					if (messages != null && !messages.isEmpty()) {
 		%>
-		<h1>Forum :</h1>
+						<h1>Forum :</h1>
 		<%
-		ListIterator<Message> iter = messages.listIterator(messages.size());
-
-		while (iter.hasPrevious()) {
-			Message message = iter.previous();
+						ListIterator<Message> iter = messages.listIterator(messages.size());
+				
+						while (iter.hasPrevious()) {
+							Message message = iter.previous();
 		%>
-
-		<p>
-			<strong><%=message.getAuthor()%></strong>, 
-			<%=message.getTimeSinceMessage()%><br />
-			<%=message.getContent()%>
-		</p>
+							<p>
+								<strong><%=message.getAuthor()%></strong>, 
+								<%=message.getTimeSinceMessage()%><br />
+								<%=message.getContent()%>
+							</p>
 		<%
+						}
 					}
 				}
 			}

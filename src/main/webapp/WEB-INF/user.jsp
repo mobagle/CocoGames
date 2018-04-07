@@ -7,7 +7,7 @@
 <html>
 <head>
 <%
-	Utilisateur u = (Utilisateur) request.getAttribute("user");
+	Utilisateur u = (Utilisateur) session.getAttribute("user");
 %>
 <title><%=u.getPseudo()%></title>
 <meta charset="utf-8" />

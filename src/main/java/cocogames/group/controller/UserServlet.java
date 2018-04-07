@@ -36,7 +36,6 @@ public class UserServlet extends HttpServlet {
 					jeuxdecoco.add(ofy().load().key(cleJeu).now());
 				}
 			}
-			req.setAttribute("user", user);
 			req.setAttribute("games", jeuxdecoco);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, resp);
 
