@@ -25,20 +25,26 @@ public class NewGameServlet extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/newgame.jsp").forward(req, resp);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
         ImagesService imagesService = ImagesServiceFactory.getImagesService();
 
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 		List<BlobKey> blobKeys = blobs.get("uploadedFile");
 		
-        String urlImage = imagesService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0)));
+        String urlLogo = imagesService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0)));
+        String urlGameplay = imagesService.getServingUrl(ServingUrlOptions.Builder.withBlobKey(blobKeys.get(1)));
 		String nom = req.getParameter("gameName");
-		String annee = req.getParameter("annee");
-		String genre = req.getParameter("genre");
-		String studio = req.getParameter("studio");
-		Jeu jeu = new Jeu(nom, Integer.valueOf(annee), studio, genre);
-		jeu.setURLImage(urlImage);
-		ofy().save().entity(jeu).now();
+		
+		String state = "error";
+		Jeu jeu = ofy().load().type(Jeu.class).id(nom).now();
+		if(jeu != null) {
+			jeu.setURLLogo(urlLogo);
+			jeu.setURLGameplay(urlGameplay);
+			ofy().save().entity(jeu).now();
+			state = "success";
+		}
+		req.setAttribute("state", state);
+		req.getRequestDispatcher("/WEB-INF/newgame.jsp").forward(req, resp);
 	}
 }

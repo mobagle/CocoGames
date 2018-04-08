@@ -29,10 +29,10 @@
 			<strong><%=j.getAnnee()%></strong>
 		</h2>
 		<%
-			if (j.getURLImage() != null) {
+			if (j.getURLLogo() != null) {
 		%>
 		<p>
-			<img src="<%=j.getURLImage()%>" alt="<%=j.getNom()%>"
+			<img src="<%=j.getURLLogo()%>" alt="<%=j.getNom()%>"
 				style="width: 300px; height: 300px;">
 		</p>
 		<%

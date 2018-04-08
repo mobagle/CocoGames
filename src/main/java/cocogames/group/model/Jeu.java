@@ -10,11 +10,13 @@ import com.googlecode.objectify.annotation.*;
 public class Jeu {
 	@Id
 	String id;
-	String nom;
-	int annee;
-	String studio;
-	String genre;
-	private String urlImage;
+	@Index String nom;
+	@Index String lowercaseName;
+	@Index int annee;
+	@Index String studio;
+	@Index String genre;
+	private String urlLogo;
+	private String urlGameplay;
 	private Key<Forum> keyForum;
 
 	private Jeu() {
@@ -23,6 +25,7 @@ public class Jeu {
 	public Jeu(String nom, int annee, String studio, String genre) {
 		this.id = nom;
 		this.setNom(nom);
+		this.setLowercaseName(nom.toLowerCase());
 		this.setAnnee(annee);
 		this.setStudio(studio);
 		this.setGenre(genre);
@@ -60,12 +63,20 @@ public class Jeu {
 		this.genre = genre;
 	}
 
-	public String getURLImage() {
-		return urlImage;
+	public String getURLLogo() {
+		return urlLogo;
 	}
 
-	public void setURLImage(String urlImage) {
-		this.urlImage = urlImage;
+	public void setURLLogo(String urlLogo) {
+		this.urlLogo = urlLogo;
+	}
+	
+	public String getURLGameplay() {
+		return urlGameplay;
+	}
+
+	public void setURLGameplay(String urlGameplay) {
+		this.urlGameplay = urlGameplay;
 	}
 	
 	public Key<Forum> getKeyForum() {
@@ -74,5 +85,13 @@ public class Jeu {
 	
 	public void setKeyForum(Key<Forum> key) {
 		this.keyForum = key;
+	}
+
+	String getLowercaseName() {
+		return lowercaseName;
+	}
+
+	void setLowercaseName(String lowercaseName) {
+		this.lowercaseName = lowercaseName;
 	}
 }

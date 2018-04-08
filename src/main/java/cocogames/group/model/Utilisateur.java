@@ -27,6 +27,11 @@ public class Utilisateur implements Serializable{
 		this.password = password;
 		this.setMesjeux(new ArrayList<>());
 	}
+	
+	public Utilisateur(String pseudo, String mail, String password, String rang) {
+		this(pseudo, mail, password);
+		this.rang = rang;
+	}
 
 	public String getPseudo() {
 		return pseudo;

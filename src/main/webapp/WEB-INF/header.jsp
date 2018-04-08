@@ -15,8 +15,8 @@
 		</button>
 	
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="form-inline navbar-nav mr-auto mt-2 mt-lg-0 ">
-				<input class="form-control mr-sm-2" type="search"
+			<form class="form-inline navbar-nav mr-auto mt-2 mt-lg-0 " action="/allgames" method="get">
+				<input class="form-control mr-sm-2" type="search" name="search"
 					placeholder="Search a game..." aria-label="Search">
 			</form>
 			<span class="navbar-text my-2 my-lg-0">

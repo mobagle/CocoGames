@@ -27,21 +27,27 @@ import cocogames.group.model.Utilisateur;
 	      throws IOException {
 		  
 		ArrayList<Jeu> listJeux = new ArrayList<>();
-		listJeux.add(new Jeu("FIFA 18", 2017, "EA","sport"));
-		listJeux.add(new Jeu("World of Warcraft", 2004, "Blizzard","mmo"));
-		listJeux.add(new Jeu("League of Legends", 2009, "Riot Games","moba"));
-		listJeux.add(new Jeu("Fortnite", 2017, "Epic Games","battleroyal"));
-		listJeux.add(new Jeu("Slay the Spire", 2018, "Mega Crit Games","rogue-like"));
+		
+		listJeux.add(new Jeu("FIFA 18", 2017, "Electronic Arts","Sport"));
+		listJeux.add(new Jeu("Need for Speed Payback", 2017, "Electronic Arts","Race"));
+		listJeux.add(new Jeu("Star Wars : Battlefront II", 2017, "Electronic Arts","FPS"));
+		
+		listJeux.add(new Jeu("World of Warcraft", 2004, "Blizzard","MMO"));
+		listJeux.add(new Jeu("HearthStone", 2014, "Blizzard","Card Game"));
+		listJeux.add(new Jeu("StarCraft 2", 2010, "Blizzard","Strategy"));
+
+		listJeux.add(new Jeu("League of Legends", 2009, "Riot Games","MOBA"));
+		
+		listJeux.add(new Jeu("Fortnite", 2017, "Epic Games","Battleroyal"));
+		listJeux.add(new Jeu("Paragon", 2018, "Epic Games","MOBA"));
+		
+		listJeux.add(new Jeu("Slay the Spire", 2018, "Mega Crit Games","Rogue-like / Card Game"));
+		
 		ofy().save().entities(listJeux).now();
 		
 		ArrayList<Utilisateur> listUsers = new ArrayList<>();
-		Utilisateur coco =new Utilisateur("cocorico", "cocolebg@gmail.com","coco");
-		Key<Jeu> keyFifa = Key.create(Jeu.class, "FIFA 18");
-		coco.getMesjeux().add(keyFifa);
-		Key<Jeu> keyWow = Key.create(Jeu.class, "World of Warcraft");
-		coco.getMesjeux().add(keyWow);
-		listUsers.add(coco);
-		listUsers.add(new Utilisateur("matou", "matou@gmail.com","matou"));
+		listUsers.add(new Utilisateur("cocorico", "cocolebg@gmail.com","coco","admin"));
+		listUsers.add(new Utilisateur("matou", "matou@gmail.com","matou", "admin"));
 		listUsers.add(new Utilisateur("luluberlu", "lulu@gmail.com","lulu"));
 		listUsers.add(new Utilisateur("leavatar", "lealea@gmail.com","lea"));
 		ofy().save().entities(listUsers).now();

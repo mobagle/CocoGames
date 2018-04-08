@@ -20,26 +20,33 @@
 <body class="bg-light">
 	<div class="container">
 	<h1>Ajouter un jeu</h1>
+	
+	<%
+	String state = (String) request.getAttribute("state");
+	if (state != null) {
+		if(state.equals("error")) {
+		%>
+		<div class="alert alert-danger mb-2" role="alert"><%=state %></div>
+		<%
+		} else if(state.equals("success")) {
+		%>
+		<div class="alert alert-info mb-2" role="alert"><%=state %></div>
+		<%	
+		}
+	}
+	%>
+	
 	<form action="<%=blobstoreService.createUploadUrl("/newgame")%>"
 		method="post" enctype="multipart/form-data">
-		<p>
-			<label>Image du jeu : <input type="file" name="uploadedFile" /></label>
-		</p>
 		<p>
 			<label>Nom du jeu associé : <input type="text"
 				name="gameName" /></label>
 		</p>
 		<p>
-			<label>Année de sortie : <input type="text"
-				name="annee" /></label>
+			<label>Logo du jeu : <input type="file" name="uploadedFile" multiple/></label>
 		</p>
 		<p>
-			<label>Genre : <input type="text"
-				name="genre" /></label>
-		</p>
-		<p>
-			<label>Studio de développement : <input type="text"
-				name="studio" /></label>
+			<label>Image de gameplay du jeu : <input type="file" name="uploadedFile" multiple/></label>
 		</p>
 		<p>
 			<input type="submit" />

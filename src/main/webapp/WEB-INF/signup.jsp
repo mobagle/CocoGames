@@ -19,7 +19,6 @@
 </head>
 
 <body class="text-center bg-light">
-<div class="container">
 	<form class="form-signin" action="/signup" method="post">
 		<img class="mb-3" src="/images/logo_rond.png" alt="" width="100" height="100">
 	
@@ -44,14 +43,13 @@
 		<input type="email" name="mail" id="mail" class="form-control mb-2" placeholder="mail@example.com" required=""> 
 		
 		<label for="password" class="sr-only">Password</label> 
-		<input type="password" name="password" id="password" class="form-control mb-5" placeholder="Password" required="">
+		<input type="password" name="password" id="password" class="form-control mb-4" placeholder="Password" required="">
 			
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+		<button class="btn btn-lg btn-primary btn-block mb-1" type="submit">Create</button>
 		
-      	<p class="mt-5 mb-3 text-muted">Already have an account? <a href='/signup'>Sign in</a></p>
+      	<p class="text-muted">Already have an account? <a href='/login'>Sign in</a></p>
 		
 	</form>
-	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>

@@ -29,7 +29,8 @@
 		<h2>Mes jeux:</h2>
 		<%
 			List<Jeu> jeux = (List<Jeu>) request.getAttribute("games");
-			for (Jeu jeu : jeux) {
+			if(jeux != null && !jeux.isEmpty()) {
+				for (Jeu jeu : jeux) {
 		%>
 		<p>
 			<strong><a href='/game?name=<%=jeu.getNom()%>'><%=jeu.getNom()%></a></strong><br />
@@ -38,6 +39,7 @@
 			<%=jeu.getStudio()%><br />
 		</p>
 		<%
+				}
 			}
 		%>
 		<p>

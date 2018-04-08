@@ -19,9 +19,11 @@
 </head>
 
 <body class="bg-light">
+	<%@include file="header.jsp" %>
 	<div class="container">
-	<h1><%=jeux.size() %> jeux</h1>
+	<h1><%=jeux != null ? jeux.size() : 0 %> jeux</h1>
 	<%
+		if(jeux != null) {
 		for(Jeu j: jeux) {
 	%>
 	<h2>
@@ -32,6 +34,21 @@
 		genre:<%=j.getGenre()%><br /> 
 		studio:<%=j.getStudio()%><br />
 	</p>
+	<%
+		}
+		} else {
+			String search = (String) request.getAttribute("search");
+	%>
+		<h2>
+		No games found
+		<%
+			if(search != null && !search.equals(""))
+		%>
+		for "<%=search %>"
+		<%
+		
+		%>
+		</h2>
 	<%
 		}
 	%>

@@ -31,9 +31,13 @@ public class GameServlet extends HttpServlet {
 		if (jeu != null) {
 			request.setAttribute("game", jeu);
 			request.setAttribute("followed", followed);
-			if(followed && jeu.getKeyForum() != null) {
 			Forum forum = ofy().load().type(Forum.class).id(name).now();
+			if(followed && forum!=null) {
 			request.setAttribute("forum", forum);
+			}
+			if(jeu.getKeyForum()==null) {
+				jeu.setKeyForum(Key.create(Forum.class,name));
+				ofy().save().entity(jeu);
 			}
 			request.getRequestDispatcher("/WEB-INF/game.jsp").forward(request, response);
 		} else {
