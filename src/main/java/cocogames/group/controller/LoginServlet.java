@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Map<String, String> messages = new HashMap<String, String>();
+		String error = "";
 
 		Utilisateur user = ofy().load().type(Utilisateur.class).id(username).now();
 		if (user != null) {
@@ -47,13 +47,13 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/user");
 			return;
 			} else {
-				messages.put("error", "Wrong password.");
+				error = "Wrong password.";
 			}
 		} else {
-			messages.put("error", "Unknown username, please try again.");
+			error = "Unknown username, please try again.";
 		}
 
-		request.setAttribute("messages", messages);
+		request.setAttribute("error", error);
 		request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 	}
 

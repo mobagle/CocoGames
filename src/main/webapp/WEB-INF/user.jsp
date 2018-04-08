@@ -21,30 +21,23 @@
 <body class="bg-light">
 	<%@include file="header.jsp" %>
 	<div class="container">
-		<h1><%=u.getPseudo()%></h1>
-		<h2>
-			<strong><%=u.getMail()%></strong> - rank:
-			<%=u.getRang()%>
-		</h2>
-		<h2>Mes jeux:</h2>
-		<%
-			List<Jeu> jeux = (List<Jeu>) request.getAttribute("games");
-			if(jeux != null && !jeux.isEmpty()) {
-				for (Jeu jeu : jeux) {
-		%>
-		<p>
-			<strong><a href='/game?name=<%=jeu.getNom()%>'><%=jeu.getNom()%></a></strong><br />
-			<%=jeu.getAnnee()%><br /> genre:
-			<%=jeu.getGenre()%><br /> studio:
-			<%=jeu.getStudio()%><br />
-		</p>
-		<%
-				}
-			}
-		%>
-		<p>
-			<a href='/allgames'>Ajouter des jeux</a>
-		</p>
+		<div class="row mt-3">
+			<div class="col-md-auto">
+				<h2>
+					<%=u.getPseudo()%>
+				</h2>		
+			</div>
+		</div>
+		
+		<div class="row mt-3 mb-2">
+			<div class="col-md-10">
+				<p class="mt-2 text-dark">My followed games</p>		
+			</div>
+			<div class="col-md-2">
+				<a class="mr-2 btn btn-success" href="/allgames" role="button">Follow more games</a>
+			</div>
+		</div>
+		<%@include file="listgame.jsp" %>
 	</div>
 
 </body>

@@ -20,14 +20,11 @@
 	      	  <h1 class="h3 mb-3 font-weight-normal">CocoGames</h1>
 	      	  
    	  		<%
-				Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");
-				if (messages != null) {
-					String errorMessage = messages.get("error");
-					if (errorMessage != null) {
-						%>
-						<div class="alert alert-danger mb-2" role="alert"><%=errorMessage %></div>
-						<%
-					}
+				String error = (String) request.getAttribute("error");
+				if (error != null) {
+					%>
+					<div class="alert alert-danger mb-2" role="alert"><%=error %></div>
+					<%
 				}
 			%>
 	      	  

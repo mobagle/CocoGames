@@ -23,80 +23,91 @@
 <body class="bg-light">
 	<%@include file="header.jsp" %>
 	<div class="container">
-
-		<h1><%=j.getNom()%></h1>
-		<h2>
-			<strong><%=j.getAnnee()%></strong>
-		</h2>
-		<%
-			if (j.getURLLogo() != null) {
-		%>
-		<p>
-			<img src="<%=j.getURLLogo()%>" alt="<%=j.getNom()%>"
-				style="width: 300px; height: 300px;">
-		</p>
-		<%
-			}
-		%>
-		<h2>Infos:</h2>
-		<p>
-
-			genre:
-			<%=j.getGenre()%><br /> studio:
-			<%=j.getStudio()%><br />
-		</p>
-
-		<form action="/game" method="post">
-			<p>
-				<input type="hidden" name="gameName" value="<%=j.getNom()%>" />
+		<div class="row mt-3 mb-3">
+			<div class="col-md-auto">
 				<%
-					if (followed) {
+					if (j.getURLLogo() != null) {
 				%>
-				<input type="submit" name="action" value="unfollow" />
-				<%
-					} else {
-				%>
-				<input type="submit" name="action" value="follow" />
+				<p>
+					<img src="<%=j.getURLLogo()%>" height="280" width="280" class="rounded float-center img-thumbnail" alt="<%=j.getNom()%>">
+				</p>
 				<%
 					}
 				%>
-			</p>
+			</div>
+			<div class="col-md-auto">
+				<h2 class="mt-2 mb-2"><strong><%=j.getNom()%></strong></h2>
+				<h3><%=j.getStudio()%></h3>
+				<h3><%=j.getAnnee()%></h3>
+				<h3><%=j.getGenre()%></h3>
 
-			<p>
-				<label>Votre message :<br /> <textarea name="content"
-						style="width: 200px; height: 100px;"></textarea></label>
-			</p>
-			<p>
-				<input type="submit" name="action" value="envoyer" />
-			</p>
-		</form>
-
-
+				<form action="/game" method="post">
+					<p>
+						<input type="hidden" name="gameName" value="<%=j.getNom()%>" />
+						<%
+							if (followed) {
+						%>
+						<button type="submit" name="action" class="btn btn-danger" value="unfollow">Unfollow</button>
+						<%
+							} else {
+						%>
+						<button type="submit" name="action" class="btn btn-success" value="follow">Follow</button>
+						<%
+							}
+						%>
+					</p>
+				</form>
+			</div>
+		</div>
+			
 		<%
 			if(followed) {
+
 				Forum forum = (Forum) request.getAttribute("forum");
 				if (forum != null) {
 					List<Message> messages = forum.getMessages();
 					if (messages != null && !messages.isEmpty()) {
-		%>
-						<h1>Forum :</h1>
-		<%
 						ListIterator<Message> iter = messages.listIterator(messages.size());
 				
 						while (iter.hasPrevious()) {
 							Message message = iter.previous();
 		%>
-							<p>
-								<strong><%=message.getAuthor()%></strong>, 
-								<%=message.getTimeSinceMessage()%><br />
-								<%=message.getContent()%>
-							</p>
+							<div class="row border bg-white rounded m-2 pt-1">
+								<div class="col-md-2">
+									<p>
+										<strong><%=message.getAuthor()%></strong><br />
+										<%=message.getTimeSinceMessage()%>
+									</p>
+								</div>
+								<div class="col-md-10">
+									<p>
+										<%=message.getContent()%>
+									</p>
+								</div>
+							</div>
 		<%
 						}
+						
+						%>
+						<form action="/game" method="post">
+						<input type="hidden" name="gameName" value="<%=j.getNom()%>" />
+						<div class="row mt-2 mb-2">
+							<div class="col-md-11">
+								<input class="form-control" type="text" name="content" placeholder="Type your message here...">
+							</div>
+							<div class="col-md-1">
+								<button type="submit" name="action" class="btn btn-info float-center" value="send">Send</button>
+							</div>
+						</div>
+						</form>
+					<%
 					}
 				}
 			}
 		%>
+		</form>
+		
+		
 	</div>
 </body>
 </html>

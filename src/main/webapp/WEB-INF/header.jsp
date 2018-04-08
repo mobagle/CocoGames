@@ -2,9 +2,9 @@
 <%
 	Utilisateur user = (Utilisateur) session.getAttribute("user");
 %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-white">
 	<div class="container">
-		<a class="navbar-brand" href="/user"> <img src="/images/logo_blanc.png"
+		<a class="navbar-brand text-dark" href="/user"> <img src="/images/logo_noir.png"
 			height="30" class="d-inline-block align-top" alt=""> CocoGames
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -19,9 +19,9 @@
 				<input class="form-control mr-sm-2" type="search" name="search"
 					placeholder="Search a game..." aria-label="Search">
 			</form>
-			<span class="navbar-text my-2 my-lg-0">
+			<span class="navbar-text my-2 my-lg-0 text-dark">
 				Signed in as <%=user.getPseudo()%>
-				<a href="/logout">Sign out</a>
+				<a href="/logout" class="text-info">Sign out</a>
 			</span>
 	
 		</div>

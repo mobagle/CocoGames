@@ -32,7 +32,7 @@ public class GameServlet extends HttpServlet {
 			request.setAttribute("game", jeu);
 			request.setAttribute("followed", followed);
 			Forum forum = ofy().load().type(Forum.class).id(name).now();
-			if(followed && forum!=null) {
+			if(followed && forum!=null) { 
 			request.setAttribute("forum", forum);
 			}
 			if(jeu.getKeyForum()==null) {
@@ -44,15 +44,16 @@ public class GameServlet extends HttpServlet {
 			response.getWriter().print("We have no informations on '" + name + "'.");
 		}
 	}
-	
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
 		String name = (String) request.getParameter("gameName");
 		String action = (String) request.getParameter("action");
+		action = action.toLowerCase();
 		if(action.equals("follow") || action.equals("unfollow")) {
 			followPost(request, response, user, name, action);
-		} else if (action.equals("envoyer")) {
+		} else if (action.equals("send")) {
 			messagePost(request, response, user, name);
 		}
 		response.sendRedirect("/game?name="+name);
@@ -61,7 +62,7 @@ public class GameServlet extends HttpServlet {
 	private void messagePost(HttpServletRequest request, HttpServletResponse response, Utilisateur user, String name) {
 		Forum forum = ofy().load().type(Forum.class).id(name).now();
 		boolean updateJeuForumKey = false;
-		if(forum == null) {
+		if(forum == null) { 
 			updateJeuForumKey = true;
 			forum = new Forum(name);
 		}

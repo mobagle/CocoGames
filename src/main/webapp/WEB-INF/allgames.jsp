@@ -6,9 +6,7 @@
 
 <html>
 <head>
-	<%
-	List<Jeu> jeux = (List<Jeu>) request.getAttribute("games");
-	%>
+
 <title>Les jeux</title>
 <meta charset="utf-8" />
 <!-- Bootstrap CSS -->
@@ -21,37 +19,20 @@
 <body class="bg-light">
 	<%@include file="header.jsp" %>
 	<div class="container">
-	<h1><%=jeux != null ? jeux.size() : 0 %> jeux</h1>
 	<%
-		if(jeux != null) {
-		for(Jeu j: jeux) {
+	List<Jeu> games = (List<Jeu>) request.getAttribute("games");
+	String search = (String) request.getAttribute("search");
 	%>
-	<h2>
-		<strong><a href='/game?name=<%=j.getNom()%>'><%=j.getNom()%></a></strong>
-	</h2>
-	<p>
-		annee:<%=j.getAnnee()%><br />
-		genre:<%=j.getGenre()%><br /> 
-		studio:<%=j.getStudio()%><br />
+	
+	<p class="mb-2 mt-2 text-dark">
+		<%=games != null ? games.size() : 0 %> games found
+		<% if(search!= null && !search.equals("")) {
+			%> for "<%=search%>"<%
+			}
+		%>
 	</p>
-	<%
-		}
-		} else {
-			String search = (String) request.getAttribute("search");
-	%>
-		<h2>
-		No games found
-		<%
-			if(search != null && !search.equals(""))
-		%>
-		for "<%=search %>"
-		<%
 		
-		%>
-		</h2>
-	<%
-		}
-	%>
-</div>
+	<%@include file="listgame.jsp" %>
+	</div>
 </body>
 </html>
