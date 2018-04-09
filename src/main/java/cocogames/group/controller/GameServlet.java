@@ -26,20 +26,22 @@ public class GameServlet extends HttpServlet {
 		
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
 		String name = (String) request.getParameter("name");
-		boolean followed = followedGame(user, name);
-		Jeu jeu = ofy().load().type(Jeu.class).id(name).now();
-		if (jeu != null) {
-			request.setAttribute("game", jeu);
-			request.setAttribute("followed", followed);
-			Forum forum = ofy().load().type(Forum.class).id(name).now();
-			if(followed && forum!=null) { 
-			request.setAttribute("forum", forum);
+		if(name != null) {
+			boolean followed = followedGame(user, name);
+			Jeu jeu = ofy().load().type(Jeu.class).id(name).now();
+			if (jeu != null) {
+				request.setAttribute("game", jeu);
+				request.setAttribute("followed", followed);
+				Forum forum = ofy().load().type(Forum.class).id(name).now();
+				if(followed && forum!=null) { 
+				request.setAttribute("forum", forum);
+				}
+				if(jeu.getKeyForum()==null) {
+					jeu.setKeyForum(Key.create(Forum.class,name));
+					ofy().save().entity(jeu);
+				}
+				request.getRequestDispatcher("/WEB-INF/game.jsp").forward(request, response);
 			}
-			if(jeu.getKeyForum()==null) {
-				jeu.setKeyForum(Key.create(Forum.class,name));
-				ofy().save().entity(jeu);
-			}
-			request.getRequestDispatcher("/WEB-INF/game.jsp").forward(request, response);
 		} else {
 			response.getWriter().print("We have no informations on '" + name + "'.");
 		}

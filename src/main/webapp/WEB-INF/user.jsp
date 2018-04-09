@@ -21,24 +21,19 @@
 <body class="bg-light">
 	<%@include file="header.jsp" %>
 	<div class="container">
-		<div class="row mt-3">
+		<div class="row mt-3 mb-2">
 			<div class="col-md-auto">
 				<h2>
 					<%=u.getPseudo()%>
 				</h2>		
 			</div>
 		</div>
-		
-		<div class="row mt-3 mb-2">
-			<div class="col-md-10">
-				<p class="mt-2 text-dark">My followed games</p>		
-			</div>
-			<div class="col-md-2">
-				<a class="mr-2 btn btn-success" href="/allgames" role="button">Follow more games</a>
+		<div class="row">
+			<div class="col-md-auto">
+				<p class="text-dark">My followed games</p>			
 			</div>
 		</div>
 		<%@include file="listgame.jsp" %>
 	</div>
-
 </body>
 </html>

@@ -5,7 +5,7 @@ List<Jeu> jeux = (List<Jeu>) request.getAttribute("games");
 	if(jeux != null) {
 %>
 <div class="row">
-<div class="col-md-6">
+<div class="col-6">
 <%
 		for(int i = 0; i<jeux.size();i++) {
 			Jeu j = jeux.get(i);
@@ -37,7 +37,7 @@ List<Jeu> jeux = (List<Jeu>) request.getAttribute("games");
 		}
 %>
 </div>
-<div class="col-md-6">
+<div class="col-6">
 <%
 		for(int i = 0; i<jeux.size();i++) {
 			Jeu j = jeux.get(i);

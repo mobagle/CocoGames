@@ -40,29 +40,29 @@ public class Message {
 		
 		DateTime then = new DateTime(this.date);
 		DateTime now = DateTime.now();
-		String time = "il y a ";
+		String time = "";
 		
 		int days = Days.daysBetween(then, now).getDays();
 		if(days > 0) {
 			if(days>=365) {
 				int years = days/365;
-				time += years + " an";
+				time += years + " year";
 				if(years>1) time +="s";
 			} else if(days>30) {
 				int months = days/30;
-				time += months + " mois";
+				time += months + " month";
 			} else if(days>=7) {
 				int weeks = days/7;
-				time += weeks + " semaine";
+				time += weeks + " week";
 				if(weeks>1) time +="s";
 			} else {
-				time += days + " jour";
+				time += days + " day";
 				if(days>1) time +="s";
 			}
 		} else {
 			int hours = Hours.hoursBetween(then, now).getHours() % 24;
 			if(hours > 0) {
-				time += hours + " heure";
+				time += hours + " hour";
 				if(hours>1) time +="s";
 			} else {
 				int minutes = Minutes.minutesBetween(then, now).getMinutes() % 60;
@@ -70,11 +70,11 @@ public class Message {
 					time += minutes + " minute";
 					if(minutes>1) time +="s";
 				} else {
-					time = "à l'instant";
+					return "just now";
 				}
 			}
 		}	
-		return time;
+		return time += " ago";
 	}
 
 }
