@@ -6,6 +6,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.ObjectifyService;
 
+import cocogames.group.model.Forum;
 import cocogames.group.model.Jeu;
 import cocogames.group.model.Utilisateur;
 
@@ -36,7 +37,17 @@ public class UserServlet extends HttpServlet {
 					jeuxdecoco.add(ofy().load().key(cleJeu).now());
 				}
 			}
+			ArrayList<Integer> nbMessages = new ArrayList<>();
+			for(Jeu j : jeuxdecoco) {
+				int size = 0;
+				if(j.getKeyForum() != null) {
+					Forum forum = ofy().load().key(j.getKeyForum()).now();
+					if(forum != null && forum.getMessages()!=null) size = forum.getMessages().size();
+				} 
+				nbMessages.add(size);
+			}
 			req.setAttribute("games", jeuxdecoco);
+			req.setAttribute("nbMessages", nbMessages);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, resp);
 
 		} catch (ServletException e) {
