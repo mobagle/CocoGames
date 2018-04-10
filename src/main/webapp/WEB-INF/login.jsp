@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Connexion</title>
+<title>Sign in</title>
 <meta charset="utf-8" />
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"

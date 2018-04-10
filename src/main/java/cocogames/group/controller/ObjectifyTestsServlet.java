@@ -17,8 +17,7 @@ import cocogames.group.model.Jeu;
 import cocogames.group.model.Utilisateur;
 
 @WebServlet(
-	    name = "ObjectifyTest",
-	    urlPatterns = {"/objectify"}
+	    name = "ObjectifyTest"
 	)
 	public class ObjectifyTestsServlet extends HttpServlet {
 

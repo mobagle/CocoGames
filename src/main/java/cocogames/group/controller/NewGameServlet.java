@@ -18,7 +18,7 @@ import com.google.appengine.api.images.*;
 import cocogames.group.model.Jeu;
 import cocogames.group.model.Utilisateur;
 
-@WebServlet(name = "Add a new game", urlPatterns = { "/newgame" })
+@WebServlet(name = "Add a new game")
 public class NewGameServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

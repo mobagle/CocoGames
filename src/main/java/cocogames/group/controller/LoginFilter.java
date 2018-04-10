@@ -23,9 +23,6 @@ public class LoginFilter implements Filter{
         
         String signupURI = request.getContextPath() +"/signup";
         boolean signupRequest = request.getRequestURI().equals(signupURI);
-
-        String objURI = request.getContextPath() +"/objectify";
-        boolean objRequest = request.getRequestURI().equals(objURI);
         
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/login";
@@ -33,7 +30,7 @@ public class LoginFilter implements Filter{
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
 
-        if (loggedIn || loginRequest || signupRequest || objRequest) {
+        if (loggedIn || loginRequest || signupRequest) {
             chain.doFilter(request, response);
         } else {
             response.sendRedirect(loginURI);
